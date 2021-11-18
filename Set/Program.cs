@@ -6,7 +6,17 @@ namespace Set
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            Set<int> set = new Set<int>();
+
+            set.Add(1);
+            set.Add(2);
+            set.Add(3);
+
+
+            foreach(var i in set)
+            {
+                Console.WriteLine(i);
+            }
         }
     }
 }

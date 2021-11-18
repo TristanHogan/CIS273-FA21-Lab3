@@ -69,15 +69,14 @@ namespace Set
             throw new NotImplementedException();
         }
 
-
         IEnumerator IEnumerable.GetEnumerator()
         {
-            throw new NotImplementedException();
+            return GetEnumerator();
         }
 
         public IEnumerator<T> GetEnumerator()
         {
-            throw new NotImplementedException();
+            return hashSet.GetEnumerator();
         }
     }
 }
