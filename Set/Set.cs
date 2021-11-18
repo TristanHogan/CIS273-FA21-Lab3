@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace Set
 {
-    public class Set<T> : ISet<T>, IEnumerable<T>
+    public class Set<T> : ISet<T>
     {
         private HashSet<T> hashSet;
 

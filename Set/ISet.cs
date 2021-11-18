@@ -2,7 +2,7 @@
 
 namespace Set
 {
-    public interface ISet<T>
+    public interface ISet<T>: IEnumerable<T>
     {
         void Add(ISet<T> s);
 
