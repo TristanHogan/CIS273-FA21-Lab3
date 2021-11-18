@@ -4,6 +4,7 @@ using StringUtilities;
 
 namespace UnitTests
 {
+    [TestClass]
     public class StringUtilitiesTests
     {
         //Call method from string

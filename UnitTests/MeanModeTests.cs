@@ -4,6 +4,7 @@ using MeanMode;
 
 namespace UnitTests
 {
+    [TestClass]
     public class MeanModeTests
     {
         [TestMethod]

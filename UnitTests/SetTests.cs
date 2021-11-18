@@ -4,6 +4,7 @@ using Set;
 
 namespace UnitTests
 {
+    [TestClass]
     public class SetTests
     {
         //Size
