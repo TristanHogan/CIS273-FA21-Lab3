@@ -11,7 +11,19 @@ namespace MeanMode
 
         public static bool MeanMode(int[] array)
         {
-            return true;
+            return computeMode(array) == computeAverage(array);
+        }
+
+        // TODO
+        private static double computeAverage(int[] array)
+        {
+            return 0.0;
+        }
+
+        // TODO
+        private static double? computeMode(int[] array)
+        {
+            return null;
         }
     }
 }

@@ -1,12 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Text.RegularExpressions;
 
 namespace TextualAnalysis
 {
     public class TextualAnalysis
     {
+        public static string stopWordFilePath = "../../../Data/test.txt";
 
-        public const string STOP_WORD_PATH = "../../../Data/test.txt";
         public TextualAnalysis()
         {
         }
@@ -17,18 +19,20 @@ namespace TextualAnalysis
             var wordCounts = new Dictionary<string, int>();
             // s = "all the faith he had had had had no effect."
 
+            // remove punctuation
+            var cleanString = Regex.Replace(s, @"[^\w\s]", "");
 
-            // split the string into words
-            var words = s.ToLower().Split();
 
+            // split the string into words (filtering out the empty strings)
+            var words = cleanString.ToLower()
+                        .Split()
+                        .Where( s => s!="" );
 
-            var stopWords = GetStopWordsFromFile(STOP_WORD_PATH);
-
-            // create hash set to store stopwords
-            var stopWordsHashSet = new HashSet<string>();
-            foreach (var word in stopWords)
+            var stopWords = GetStopWordsFromFile(stopWordFilePath);
+            HashSet<string> stopWordHashSet = new HashSet<string>();
+            foreach(var word in stopWords)
             {
-                stopWordsHashSet.Add(word);
+                stopWordHashSet.Add(word);
             }
 
             // foreach word process it
@@ -37,8 +41,12 @@ namespace TextualAnalysis
 
             foreach (string word in words)
             {
-
                 // if ignoreStopWords is true and word is not a stop word, then do this
+
+                if( ignoreStopWords && stopWordHashSet.Contains(word) )
+                {
+                    continue;
+                }
 
                 if (wordCounts.ContainsKey(word))
                 {
@@ -56,6 +64,12 @@ namespace TextualAnalysis
 
         public static Dictionary<string, int> ComputeWordFrequenciesFromFile(string path, bool ignoreStopWords = false)
         {
+            // read in the file
+
+            // call the other method
+
+            // return the result of the other method
+
             return null;
         }
 
@@ -66,6 +80,7 @@ namespace TextualAnalysis
 
             foreach (var line in rawLines)
             {
+                // ignore blank lines
                 if (line.Trim() != "")
                 {
                     lines.Add(line.Trim().ToLower());
