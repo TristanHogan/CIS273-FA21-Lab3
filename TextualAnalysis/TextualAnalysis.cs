@@ -7,7 +7,7 @@ namespace TextualAnalysis
 {
     public class TextualAnalysis
     {
-        public static string stopWordFilePath = "../../../Data/test.txt";
+        public static string stopWordFilePath = "../../../Data/stop-words.txt";
 
         public TextualAnalysis()
         {
@@ -26,24 +26,24 @@ namespace TextualAnalysis
             // split the string into words (filtering out the empty strings)
             var words = cleanString.ToLower()
                         .Split()
-                        .Where( s => s!="" );
+                        .Where(s => s != "");
 
             var stopWords = GetStopWordsFromFile(stopWordFilePath);
             HashSet<string> stopWordHashSet = new HashSet<string>();
-            foreach(var word in stopWords)
+            foreach (var word in stopWords)
             {
                 stopWordHashSet.Add(word);
             }
 
             // foreach word process it
-                // if it's in the hashtable, then increment the count
-                // else make a new entry with a count of 1
+            // if it's in the hashtable, then increment the count
+            // else make a new entry with a count of 1
 
             foreach (string word in words)
             {
                 // if ignoreStopWords is true and word is not a stop word, then do this
 
-                if( ignoreStopWords && stopWordHashSet.Contains(word) )
+                if (ignoreStopWords && stopWordHashSet.Contains(word))
                 {
                     continue;
                 }
@@ -52,6 +52,7 @@ namespace TextualAnalysis
                 {
                     wordCounts[word]++;
                 }
+
                 else
                 {
                     wordCounts[word] = 1;
@@ -64,13 +65,11 @@ namespace TextualAnalysis
 
         public static Dictionary<string, int> ComputeWordFrequenciesFromFile(string path, bool ignoreStopWords = false)
         {
-            // read in the file
+            string text = System.IO.File.ReadAllText(path);
 
-            // call the other method
+            Dictionary<string, int> Result = ComputeWordFrequencies(text, ignoreStopWords);
 
-            // return the result of the other method
-
-            return null;
+            return Result;
         }
 
         private static string[] GetStopWordsFromFile(string path)
@@ -81,6 +80,7 @@ namespace TextualAnalysis
             foreach (var line in rawLines)
             {
                 // ignore blank lines
+
                 if (line.Trim() != "")
                 {
                     lines.Add(line.Trim().ToLower());
